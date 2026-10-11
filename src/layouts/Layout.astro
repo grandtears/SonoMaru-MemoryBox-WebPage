@@ -1,0 +1,73 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="sonomaru-memorybox" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<style>
+			:root {
+				--accent: 136, 58, 234;
+				--accent-light: 224, 204, 250;
+				--accent-dark: 49, 10, 101;
+				--accent-gradient: linear-gradient(
+					45deg,
+					rgb(var(--accent)),
+					rgb(var(--accent-light)) 30%,
+					white 60%
+				);
+			}
+			html {
+				font-family: system-ui, sans-serif;
+				background: #13151a; /* 画像が読み込まれるまでの背景色 */
+			}
+			body {
+				/* 背景画像を設定 */
+				background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/backGround.png');
+				background-size: cover; /* 画面全体を覆うように拡大・縮小 */
+				background-position: center; /* 画像の中央を基準に表示 */
+				background-attachment: fixed; /* スクロールしても背景を固定 */
+				
+				margin: 0;
+				padding: 4rem 0; /* ページ全体の上下に余白を持たせる */
+				min-height: 100vh;
+				box-sizing: border-box; /* paddingを含めて高さを100vhにする */
+			}
+			code {
+				font-family:
+					Menlo,
+					Monaco,
+					Lucida Console,
+					Liberation Mono,
+					DejaVu Sans Mono,
+					Bitstream Vera Sans Mono,
+					Courier New,
+					monospace;
+			}
+			main {
+				margin: auto;
+				padding: 2rem;
+				width: 800px;
+				max-width: calc(100% - 4rem);
+				color: white;
+				font-size: 20px;
+				line-height: 1.6;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>

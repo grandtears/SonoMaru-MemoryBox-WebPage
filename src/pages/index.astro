@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MemberProfile from '../components/MemberProfile.tsx';
+
+// --- membersデータにyoutubeのリンクを追加 ---
+const members = [
+  {
+    name: 'marukuro',
+    jellyfish: true,
+    icon: '/images/marukuro.png',
+    iconPosition: 'center top',
+    history: [
+      'VRC初心者ノ寺子屋 参期桃組⁄肆期講師⁄伍期 みたらし組副担任',
+      '放課後レクリエーション部 38期',
+      'VRCスクール 15-1⁄ADV4th ぷり組',
+      '私立VRC学園 23-2',
+    ],
+    links: {
+      x: 'https://x.com/vmarur_2525',
+      vrchat: 'https://vrchat.com/home/user/usr_43cfaa49-8e65-462d-ad55-33e00aa9c12b',
+    },
+  },
+  {
+    name: 'Sonoty',
+    icon: '/images/sonoty.PNG',
+    history: [
+      '2023/03/11 Start',
+      '私立VRC学園16期B日程4組卒業',
+      '私立VRC学園17期3組副担任',
+      'VRCスクール16-3卒業',
+      '私立VRC学園23期2組副担任',
+      'VRCスクールADV 4‐さんどね組',
+    ],
+    playTime: '18,500時間',
+    links: {
+      x: 'https://x.com/SonotyHearts',
+      vrchat: 'https://vrchat.com/home/user/usr_668cf573-47de-4418-85fe-95e319e2c413',
+      note: 'https://note.com/sonoty_hearts',
+      instagram: 'https://www.instagram.com/sonoty_vrc/',
+      youtube: 'https://www.youtube.com/@your-channel-sonoty', // ←ここにYouTubeのURL
+    },
+  },
+];
+---
+
+<Layout title="そのまるの思い出箱">
+  <h1 style="text-align: center; font-size: 3rem; font-weight: 800; margin-bottom: 2rem;">
+    そのまるの思い出箱
+  </h1>
+  <p style="text-align: center; font-size: 1.2rem; margin-bottom: 4rem;">
+    marukuroとSonotyの2人による創作サークルです。
+  </p>
+
+  <div class="members">
+    {members.map(member => (
+      <MemberProfile client:load member={member} />
+    ))}
+  </div>
+</Layout>
