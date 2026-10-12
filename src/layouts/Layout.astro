@@ -32,6 +32,7 @@ const { title } = Astro.props;
 				background: #13151a; /* 画像が読み込まれるまでの背景色 */
 			}
 			body {
+				isolation: isolate;
 				/* 背景画像を設定 */
 				background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/backGround.png');
 				background-size: cover; /* 画面全体を覆うように拡大・縮小 */
@@ -55,6 +56,8 @@ const { title } = Astro.props;
 					monospace;
 			}
 			main {
+				position: relative;
+				z-index: 1;
 				margin: auto;
 				padding: 2rem;
 				width: 800px;
@@ -63,9 +66,47 @@ const { title } = Astro.props;
 				font-size: 20px;
 				line-height: 1.6;
 			}
+			.shooting-stars {
+				position: fixed;
+				inset: 0;
+				z-index: 0;
+				overflow: hidden;
+				pointer-events: none;
+			}
+			.shooting-star {
+				position: absolute;
+				top: 12%;
+				left: 18%;
+				width: 88px;
+				height: 2px;
+				border-radius: 50%;
+				background: linear-gradient(to right, transparent, rgba(219, 231, 255, 0.9));
+				opacity: 0;
+				animation: shooting-star 14s linear infinite;
+			}
+			.shooting-star:nth-child(2) {
+				top: 28%;
+				left: 72%;
+				width: 68px;
+				animation-delay: 7s;
+			}
+			@keyframes shooting-star {
+				0% { opacity: 0; transform: translate(0, 0) rotate(35deg); }
+				2% { opacity: 0.65; }
+				10% { opacity: 0.65; }
+				15% { opacity: 0; transform: translate(240px, 168px) rotate(35deg); }
+				100% { opacity: 0; transform: translate(240px, 168px) rotate(35deg); }
+			}
+			@media (prefers-reduced-motion: reduce) {
+				.shooting-stars { display: none; }
+			}
 		</style>
 	</head>
 	<body>
+		<div class="shooting-stars" aria-hidden="true">
+			<span class="shooting-star"></span>
+			<span class="shooting-star"></span>
+		</div>
 		<main>
 			<slot />
 		</main>
